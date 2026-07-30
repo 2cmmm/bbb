@@ -654,7 +654,7 @@ textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(106,90
   <!-- My Posts -->
   <div class="card" id="myPostsCard">
     <div class="my-posts-header">
-      <span>🌙 我的心事</span>
+      <span>🌙 大家的心事</span>
       <span class="post-count-badge" id="myCount">0条</span>
     </div>
     <div id="myPostsContainer"></div>
@@ -827,7 +827,7 @@ function submitPost() {
 function renderMyPosts() {
   const container = document.getElementById('myPostsContainer');
   const emptyState = document.getElementById('emptyState');
-  const myPosts = posts.filter(p => p.userId === userId).reverse();
+  const myPosts = [...posts].reverse();
 
   document.getElementById('myCount').textContent = myPosts.length + '条';
 
