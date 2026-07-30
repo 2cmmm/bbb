@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>解忧树洞</title>
+<style>
+:root {
+  --bg: #1a1a2e;
+  --card: rgba(255,255,255,0.96);
+  --primary: #6a5acd;
+  --primary-light: #8b74d8;
+  --gold: #ffd700;
+  --text: #444;
+  --text-light: #999;
+  --danger: #ff6b6b;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 26px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.35) 0 8%, transparent 9%),
+              radial-gradient(circle at 90% 18%, rgba(255,255,255,0.22) 0 6%, transparent 7%),
+              linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%);
+  padding: 18px;
+  animation: bgNight 12s ease-in-out infinite alternate;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+@keyframes bgNight {
+  0% { background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.35) 0 8%, transparent 9%), radial-gradient(circle at 90% 18%, rgba(255,255,255,0.22) 0 6%, transparent 7%), linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%); }
+  50% { background: radial-gradient(circle at 15% 14%, rgba(255,255,255,0.4) 0 10%, transparent 11%), radial-gradient(circle at 85% 22%, rgba(255,255,255,0.28) 0 7%, transparent 8%), linear-gradient(180deg, #1e1e3f 0%, #1a2a4a 45%, #123a66 70%, #f0dcff 100%); }
+  100% { background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.35) 0 8%, transparent 9%), radial-gradient(circle at 90% 18%, rgba(255,255,255,0.22) 0 6%, transparent 7%), linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%); }
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.star:nth-child(1) { top: 8%; left: 12%; animation-delay: 0s; }
+.star:nth-child(2) { top: 12%; left: 30%; animation-delay: 0.5s; }
+.star:nth-child(3) { top: 6%; left: 60%; animation-delay: 1s; }
+.star:nth-child(4) { top: 18%; left: 80%; animation-delay: 1.5s; }
+.star:nth-child(5) { top: 22%; left: 18%; animation-delay: 2s; }
+.star:nth-child(6) { top: 30%; left: 50%; animation-delay: 0.8s; }
+.star:nth-child(7) { top: 10%; left: 75%; animation-delay: 1.2s; }
+.star:nth-child(8) { top: 25%; left: 8%; animation-delay: 1.8s; }
+
+@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+/* Grass */
+.grass {
+  position: fixed; bottom: 0; left: 0;
+  width: 100%; height: 180px;
+  background: linear-gradient(180deg, transparent 0%, #5a8f7b 30%, #3f6b58 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Fireflies */
+.firefly {
+  position: absolute;
+  width: 10px; height: 10px;
+  background: rgba(255,255,150,0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,255,150,0.8);
+  animation: firefly 8s ease-in-out infinite;
+  z-index: 1;
+}
+.firefly:nth-child(9) { left: 10%; bottom: 120px; animation-delay: 0s; }
+.firefly:nth-child(10) { left: 30%; bottom: 100px; animation-delay: 2s; }
+.firefly:nth-child(11) { left: 55%; bottom: 130px; animation-delay: 4s; }
+.firefly:nth-child(12) { left: 80%; bottom: 90px; animation-delay: 6s; }
+.firefly:nth-child(13) { left: 18%; bottom: 140px; animation-delay: 1s; }
+.firefly:nth-child(14) { left: 42%; bottom: 115px; animation-delay: 2.7s; }
+.firefly:nth-child(15) { left: 68%; bottom: 132px; animation-delay: 5s; }
+.firefly:nth-child(16) { left: 88%; bottom: 102px; animation-delay: 7.3s; }
+.firefly:nth-child(17) { left: 25%; bottom: 90px; animation-delay: 0.4s; }
+.firefly:nth-child(18) { left: 60%; bottom: 142px; animation-delay: 3.4s; }
+.firefly:nth-child(19) { left: 5%; bottom: 130px; animation-delay: 1.5s; }
+.firefly:nth-child(20) { left: 48%; bottom: 95px; animation-delay: 4.2s; }
+.firefly:nth-child(21) { left: 75%; bottom: 145px; animation-delay: 6.2s; }
+.firefly:nth-child(22) { left: 35%; bottom: 122px; animation-delay: 2.2s; }
+.firefly:nth-child(23) { left: 92%; bottom: 118px; animation-delay: 7.8s; }
+.firefly:nth-child(24) { left: 12%; bottom: 98px; animation-delay: 0.7s; }
+.firefly:nth-child(25) { left: 52%; bottom: 138px; animation-delay: 3.8s; }
+.firefly:nth-child(26) { left: 82%; bottom: 125px; animation-delay: 6.6s; }
+
+@keyframes firefly {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-30px) translateX(15px); opacity: 1; }
+}
+
+/* Main Layout */
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 40px;
+}
+
+/* Header */
+.top-deco { text-align: center; margin-bottom: 24px; padding-top: 10px; }
+
+.tree {
+  font-size: 52px;
+  animation: treeSway 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255,255,200,0.6));
+}
+
+@keyframes treeSway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+
+h1 {
+  text-align: center;
+  font-size: 42px;
+  color: #fffaf2;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+  font-weight: 800;
+  animation: titleGlow 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 8px #fff, 0 0 15px #ffdd88, 0 0 25px #ffc866, 0 0 35px #ffbb44; }
+  to { text-shadow: 0 0 12px #fff, 0 0 25px #ffdd99, 0 0 40px #ffcc77, 0 0 55px #ffbf55; }
+}
+
+.subtitle { text-align: center; color: #d6c7ff; font-size: 15px; line-height: 1.6; }
+
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0;
+}
+.divider span { color: var(--gold); font-size: 18px; }
+.divider-line {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.6), transparent);
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.8);
+}
+
+.card-title {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mood Selector */
+.mood-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mood-item {
+  text-align: center;
+  padding: 10px 4px;
+  background: #f7f3ff;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.mood-item:hover { transform: translateY(-3px); background: #e9ddff; }
+.mood-item.active { border-color: var(--primary); background: #e9ddff; box-shadow: 0 0 0 4px rgba(106,90,205,0.15); }
+.mood-item span { font-size: 28px; display: block; margin-bottom: 4px; }
+.mood-item p { font-size: 12px; color: #555; }
+
+/* Nickname */
+.nickname-box { display: flex; gap: 10px; margin-bottom: 16px; }
+.nickname-box input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d6c7ff;
+  border-radius: 12px;
+  background: #fcfbff;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+.nickname-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(106,90,205,0.15); }
+.nickname-box button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.nickname-box button:hover { background: var(--primary-light); }
+
+/* Textarea */
+textarea {
+  width: 100%;
+  min-height: 130px;
+  border: 1px solid #d6c7ff;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  background: #fcfbff;
+  transition: all 0.3s;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.7;
+}
+textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(106,90,205,0.15); }
+
+/* Buttons */
+.submit-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  color: #fff;
+  font-size: 17px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(106,90,205,0.35); }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Game */
+.game-area { margin-top: 6px; }
+.game-status {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #555;
+}
+.hole-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.hole {
+  background: #b89676;
+  height: 90px;
+  border-radius: 50% 50% 35% 35%;
+  position: relative;
+  overflow: hidden;
+}
+.mole {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 48px;
+  transition: bottom 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.mole.show { bottom: 5px; }
+.game-operate { text-align: center; margin-top: 10px; }
+.game-operate button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.game-operate button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(106,90,205,0.35); }
+
+/* My Posts */
+.my-posts-header {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-count-badge {
+  background: #ede9ff;
+  color: var(--primary);
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.post-card {
+  background: #f7f3ff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border-left: 4px solid var(--primary);
+}
+.post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.post-mood { font-size: 26px; }
+.post-time { font-size: 12px; color: var(--text-light); }
+.post-content {
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+.post-nickname {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Reply boxes */
+.reply-box {
+  background: #ede9ff;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #553c9a;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.suggestion-box {
+  background: #fffaf2;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #b8860b;
+  line-height: 1.6;
+  border-left: 4px solid var(--gold);
+}
+
+.empty-state {
+  text-align: center;
+  color: #aaa;
+  padding: 36px 0;
+  font-size: 15px;
+}
+.empty-state .icon { font-size: 42px; margin-bottom: 10px; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #d6c7ff;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Admin Button */
+.admin-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-btn:hover { transform: scale(1.05); }
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 80;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+
+.modal-panel {
+  background: #fffaf2;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 24px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.modal-panel h3 { color: var(--primary); font-size: 20px; margin-bottom: 12px; }
+.modal-panel p { color: #555; line-height: 1.8; font-size: 15px; margin-bottom: 14px; }
+
+.modal-panel input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d6c7ff;
+  border-radius: 12px;
+  background: #fcfbff;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+.modal-panel input:focus { border-color: var(--primary); }
+
+.modal-panel button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 4px;
+  font-family: inherit;
+}
+.modal-panel button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(106,90,205,0.3); }
+
+.login-error { color: var(--danger); font-size: 13px; margin-top: 8px; text-align: center; }
+
+/* Admin Dashboard */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.stat-card {
+  background: #f8f9fa;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+}
+.stat-card .big { font-size: 26px; font-weight: 800; color: var(--primary); }
+.stat-card .small { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+.admin-post-card {
+  background: #f7f3ff;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--primary);
+}
+.admin-post-card .post-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.admin-post-card .meta {
+  font-size: 11px;
+  color: var(--text-light);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.export-bar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.export-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  background: var(--text);
+  color: #fff;
+}
+.export-btn:hover { opacity: 0.85; }
+
+.delete-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 8px;
+}
+.delete-btn:hover { opacity: 0.85; }
+
+.logout-link {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 3px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.tab-btn.active { background: #fff; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 15px;
+  z-index: 999;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* Responsive */
+@media (max-width: 480px) {
+  body { padding: 12px; }
+  h1 { font-size: 32px; }
+  .mood-list { grid-template-columns: repeat(3, 1fr); }
+  .card { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+<div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+
+<!-- Grass -->
+<div class="grass"></div>
+
+<!-- Fireflies -->
+<div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+<div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+<div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+<div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+<div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+
+<div class="wrap" id="app">
+
+  <!-- Header -->
+  <div class="top-deco"><div class="tree">🌳</div></div>
+  <h1>解忧树洞</h1>
+  <p class="subtitle">夜色温柔，心事也可以轻轻安放。<br />把烦恼说出来，让树洞替你接住。</p>
+  <div class="divider"><div class="divider-line"></div><span>✨</span><div class="divider-line"></div></div>
+
+  <!-- Mini Game -->
+  <div class="card" id="miniGame">
+    <h2 class="card-title">🎮 即时解压 · 打地鼠</h2>
+    <p style="color:#666;margin-bottom:10px;font-size:14px;">压力无处释放？点击地鼠，把烦恼一起打掉！</p>
+    <div class="game-area">
+      <div class="game-status">
+        <div>当前得分：<strong id="score">0</strong></div>
+        <div>剩余时间：<strong id="time">30</strong>s</div>
+      </div>
+      <div class="hole-wrap" id="holeWrap">
+        <div class="hole"><div class="mole">🐹</div></div>
+        <div class="hole"><div class="mole">🐹</div></div>
+        <div class="hole"><div class="mole">🐹</div></div>
+        <div class="hole"><div class="mole">🐹</div></div>
+        <div class="hole"><div class="mole">🐹</div></div>
+        <div class="hole"><div class="mole">🐹</div></div>
+      </div>
+      <div class="game-operate"><button onclick="startGame()">🎯 开启30秒解压对局</button></div>
+    </div>
+  </div>
+
+  <!-- New Post -->
+  <div class="card" id="newPost">
+    <h2 class="card-title">💌 写下你的烦恼</h2>
+    <p style="color:#666;margin-bottom:12px;font-size:14px;">选择你当下的心情：</p>
+    <div class="mood-list" id="moodSelector">
+      <div class="mood-item" data-mood="🤩"><span>🤩</span><p>兴奋</p></div>
+      <div class="mood-item" data-mood="😊"><span>😊</span><p>愉悦</p></div>
+      <div class="mood-item" data-mood="😌"><span>😌</span><p>平静</p></div>
+      <div class="mood-item" data-mood="😔"><span>😔</span><p>低落</p></div>
+      <div class="mood-item" data-mood="😢"><span>😢</span><p>难过</p></div>
+      <div class="mood-item" data-mood="🥺"><span>🥺</span><p>委屈</p></div>
+      <div class="mood-item" data-mood="😠"><span>😠</span><p>愤怒</p></div>
+      <div class="mood-item" data-mood="😩"><span>😩</span><p>疲惫</p></div>
+      <div class="mood-item" data-mood="😰"><span>😰</span><p>焦虑</p></div>
+      <div class="mood-item" data-mood="😱"><span>😱</span><p>慌张</p></div>
+      <div class="mood-item" data-mood="😒"><span>😒</span><p>无奈</p></div>
+      <div class="mood-item active" data-mood="🥱"><span>🥱</span><p>倦怠</p></div>
+    </div>
+
+    <p style="color:#666;margin:16px 0 8px;font-size:14px;">你的匿名昵称：</p>
+    <div class="nickname-box">
+      <input id="nickname" type="text" placeholder="点击随机生成，也可以自己改" />
+      <button onclick="generateNickname()">🎲 随机生成</button>
+    </div>
+
+    <textarea id="content" placeholder="在这里写下你想说的话... 也许是工作里的委屈，也许是生活中的小烦恼，也许只是想找一个安静的地方放空。写完这一页，就让烦恼暂时留在这里吧。" maxlength="2000"></textarea>
+
+    <button class="submit-btn" onclick="submitPost()">🌙 提交到解忧树洞</button>
+  </div>
+
+  <!-- My Posts -->
+  <div class="card" id="myPostsCard">
+    <div class="my-posts-header">
+      <span>🌙 我的心事</span>
+      <span class="post-count-badge" id="myCount">0条</span>
+    </div>
+    <div id="myPostsContainer"></div>
+    <div class="empty-state" id="emptyState">
+      <div class="icon">🌱</div>
+      <p>这里还没有留言，成为第一个把心事放进树洞的人吧。</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    愿你在这里得到片刻放松<br />解忧树洞 · 接住你的每一种情绪
+  </div>
+</div>
+
+<!-- Admin Button -->
+<button class="admin-btn" onclick="openAdmin()">🔐</button>
+
+<!-- Admin Modal -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal-panel" id="adminPanel">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- Game Result Modal -->
+<div class="modal-overlay" id="gameModal">
+  <div class="modal-panel" style="border-radius:24px;text-align:center;">
+    <h3>🌟 你玩得太棒啦！</h3>
+    <p id="modalText">地鼠都被你打跑了，烦恼也一起被打掉啦。<br />希望你能轻轻松一口气，接下来的日子会慢慢变好。</p>
+    <button onclick="closeGameModal()">知道啦</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== 配置 ====================
+const STORAGE_KEY = 'shudong_posts';
+const USER_KEY = 'shudong_user';
+const ADMIN_PWD = 'admin123';
+
+// ==================== 数据 ====================
+const funnyNames = [
+  '下班第一名','奶茶续命选手','今天也不想上班','情绪偷偷藏好了','树洞特派员',
+  '烦恼粉碎机','快乐失踪人口','压力山大人','只想躺着放空','今天也很努力',
+  '委屈但不说','愤怒的小云朵','疲惫小星星','焦虑收藏家','无奈体验官',
+  '打工人代言人','摸鱼冠军候选人','情绪管理员','深夜思考选手','温柔吐槽家'
+];
+
+const replySet = [
+  { comfort: '我完全能体会你此刻的心情，愿意坦诚倾诉就已经十分勇敢，不用强迫自己硬撑，负面情绪本就值得被接纳。', advice: '如果心里压抑，试着给自己10分钟独处时间，深呼吸放空，不用立刻解决所有难题，允许当下的自己脆弱片刻。' },
+  { comfort: '抱抱你，积攒的委屈和疲惫终于有地方安放了，你已经独自扛了很久，真的辛苦了。', advice: '睡前简单梳理情绪，写下一件今天让你稍微舒心的小事，平衡糟糕的感受，减少精神内耗。' },
+  { comfort: '不用觉得倾诉是麻烦，树洞会安静接住你所有杂乱的情绪，没有人会评判你的喜怒哀乐。', advice: '情绪上头时不要做重大决定，暂时转移注意力，喝水、散步、听歌都能平缓紧绷的状态。' },
+  { comfort: '这段难熬的时光只是暂时的，坏情绪不会永远停留，你远比自己想象中更坚强。', advice: '学会适度示弱，不必事事独自承担，寻找身边温和的人偶尔倾诉，不要把心事全部封闭在心底。' },
+  { comfort: '我明白心里沉甸甸的滋味，把话说出来之后，心里的重量会悄悄减轻不少。', advice: '每天预留一小段只属于自己的时间，做纯粹放松、不带任何目的的小事，好好关照内心。' },
+  { comfort: '喜怒哀乐都是正常的，不必为低落、烦躁感到愧疚，好好善待当下情绪低落的自己。', advice: '区分情绪和事实，不要被一时的坏感受定义全部生活，事情会随时间慢慢出现转机。' },
+  { comfort: '谢谢你愿意信任树洞，把藏在心底的话讲出来，往后会慢慢迎来轻松平和的日子。', advice: '减少对完美的苛求，接纳自己的不完美，降低心理期待，会发现生活轻松许多。' },
+];
+
+// ==================== 状态 ====================
+let posts = [];
+let currentMood = '🥱';
+let userId = '';
+let userName = '';
+
+// ==================== 初始化 ====================
+function init() {
+  // 加载或创建用户身份
+  let userData = {};
+  try {
+    const stored = localStorage.getItem(USER_KEY);
+    if (stored) userData = JSON.parse(stored);
+  } catch(e) {}
+
+  if (!userData.id) {
+    userId = 'u_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    userName = randomFrom(funnyNames);
+    localStorage.setItem(USER_KEY, JSON.stringify({ id: userId, name: userName }));
+  } else {
+    userId = userData.id;
+    userName = userData.name || randomFrom(funnyNames);
+  }
+
+  document.getElementById('nickname').value = userName;
+
+  // 加载帖子
+  loadPosts();
+
+  // 情绪选择
+  document.getElementById('moodSelector').addEventListener('click', function(e) {
+    const item = e.target.closest('.mood-item');
+    if (!item) return;
+    this.querySelectorAll('.mood-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    currentMood = item.dataset.mood;
+  });
+
+  // 键盘快捷键 Ctrl+Enter 提交
+  document.getElementById('content').addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') submitPost();
+  });
+
+  // 模态背景点击关闭
+  document.getElementById('adminModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAdmin();
+  });
+  document.getElementById('gameModal').addEventListener('click', function(e) {
+    if (e.target === this) closeGameModal();
+  });
+
+  // 无数据时添加种子数据
+  if (posts.length === 0) seedData();
+
+  renderMyPosts();
+}
+
+// ==================== 数据持久化 ====================
+function loadPosts() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) posts = JSON.parse(stored);
+  } catch(e) { posts = []; }
+}
+
+function savePosts() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+}
+
+// ==================== 提交帖子 ====================
+function submitPost() {
+  const content = document.getElementById('content').value.trim();
+  const nicknameInput = document.getElementById('nickname');
+  const nickname = nicknameInput.value.trim();
+
+  if (!nickname) { showToast('😅 请先填写或生成一个匿名昵称'); return; }
+  if (!content) { showToast('😅 写点什么再提交吧~'); return; }
+  if (content.length < 2) { showToast('😅 多说一点吧，至少两个字~'); return; }
+
+  // 更新用户名
+  userName = nickname;
+  const userData = JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+  userData.name = nickname;
+  localStorage.setItem(USER_KEY, JSON.stringify(userData));
+
+  // 随机选取树洞回复
+  const reply = replySet[Math.floor(Math.random() * replySet.length)];
+
+  const post = {
+    id: 'p_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+    userId: userId,
+    userName: userName,
+    mood: currentMood,
+    content: content,
+    time: new Date().toISOString(),
+    comfort: reply.comfort,
+    advice: reply.advice,
+  };
+
+  posts.push(post);
+  savePosts();
+
+  document.getElementById('content').value = '';
+  showToast('✅ 你的心事已经放进解忧树洞啦！说出来好多了吧~');
+  renderMyPosts();
+}
+
+// ==================== 渲染我的帖子 ====================
+function renderMyPosts() {
+  const container = document.getElementById('myPostsContainer');
+  const emptyState = document.getElementById('emptyState');
+  const myPosts = posts.filter(p => p.userId === userId).reverse();
+
+  document.getElementById('myCount').textContent = myPosts.length + '条';
+
+  if (myPosts.length === 0) {
+    container.innerHTML = '';
+    emptyState.style.display = 'block';
+  } else {
+    emptyState.style.display = 'none';
+    container.innerHTML = myPosts.map(p => `
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-mood">${p.mood}</div>
+          <div class="post-time">${timeAgo(p.time)}</div>
+        </div>
+        <div class="post-nickname">🎭 ${escapeHtml(p.userName)}</div>
+        <div class="post-content">${escapeHtml(p.content)}</div>
+        <div class="reply-box">💛 树洞暖心安慰：${escapeHtml(p.comfort || '愿你被温柔对待')}</div>
+        <div class="suggestion-box">💡 情绪疏导小建议：${escapeHtml(p.advice || '好好照顾自己')}</div>
+      </div>
+    `).join('');
+  }
+}
+
+// ==================== 管理员 ====================
+let adminLoggedIn = false;
+
+function openAdmin() {
+  document.getElementById('adminModal').classList.add('show');
+  renderAdminPanel();
+}
+
+function closeAdmin() {
+  document.getElementById('adminModal').classList.remove('show');
+}
+
+function renderAdminPanel() {
+  const panel = document.getElementById('adminPanel');
+
+  if (!adminLoggedIn) {
+    panel.innerHTML = `
+      <h3>🔐 管理员登录</h3>
+      <p>请输入管理员密码进入后台，查看所有留言并管理不当内容。</p>
+      <input type="password" id="adminPwd" placeholder="输入密码" autocomplete="off">
+      <div style="text-align:center;">
+        <button onclick="adminLogin()">确认进入</button>
+        <button onclick="closeAdmin()" style="background:#999;">取消</button>
+      </div>
+      <div class="login-error" id="loginError"></div>
+    `;
+  } else {
+    renderDashboard();
+  }
+}
+
+function adminLogin() {
+  const pwd = document.getElementById('adminPwd').value;
+  if (pwd === ADMIN_PWD) {
+    adminLoggedIn = true;
+    renderDashboard();
+  } else {
+    document.getElementById('loginError').textContent = '❌ 密码错误，请重试';
+  }
+}
+
+function renderDashboard() {
+  const panel = document.getElementById('adminPanel');
+
+  const totalPosts = posts.length;
+  const uniqueUsers = [...new Set(posts.map(p => p.userId))].length;
+
+  // 情绪分布
+  const moodDist = {};
+  posts.forEach(p => { moodDist[p.mood] = (moodDist[p.mood] || 0) + 1; });
+
+  panel.innerHTML = `
+    <h3>🗂️ 树洞后台管理</h3>
+    <p>这里可以查看所有留言，并删除不当内容。数据存储在浏览器本地。</p>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="big">${totalPosts}</div><div class="small">总留言数</div></div>
+      <div class="stat-card"><div class="big">${uniqueUsers}</div><div class="small">活跃人数</div></div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <strong style="font-size:13px;">情绪分布</strong>
+      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+        ${Object.entries(moodDist).sort((a,b)=>b[1]-a[1]).map(([k,v]) =>
+          `<span style="background:#f0f0f0;padding:4px 10px;border-radius:12px;font-size:12px;">${k} ×${v}</span>`
+        ).join('')}
+      </div>
+    </div>
+
+    <div class="export-bar">
+      <button class="export-btn" onclick="exportAll()">📥 导出全部数据 (CSV)</button>
+    </div>
+
+    <div class="tab-bar" id="adminTabs">
+      <button class="tab-btn active" data-tab="all" onclick="switchAdminTab('all')">全部 (${totalPosts})</button>
+    </div>
+
+    <div id="adminPostList">${renderAdminPosts()}</div>
+
+    <div class="logout-link" onclick="logoutAdmin()">退出管理后台</div>
+  `;
+}
+
+function switchAdminTab(tab) {
+  document.querySelectorAll('#adminTabs .tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  document.getElementById('adminPostList').innerHTML = renderAdminPosts();
+}
+
+function renderAdminPosts() {
+  const list = [...posts].reverse();
+  if (list.length === 0) {
+    return '<div class="empty-state"><p>暂无留言数据</p></div>';
+  }
+
+  return list.map(p => `
+    <div class="admin-post-card">
+      <div class="post-text">${escapeHtml(p.content)}</div>
+      <div class="meta">
+        <span>${p.mood}</span>
+        <span>🎭 ${escapeHtml(p.userName)}</span>
+        <span>${timeAgo(p.time)}</span>
+      </div>
+      <button class="delete-btn" onclick="deletePost('${p.id}')">🗑️ 删除这条</button>
+    </div>
+  `).join('');
+}
+
+function deletePost(id) {
+  if (!confirm('确定删除这条留言吗？此操作不可撤销。')) return;
+  posts = posts.filter(p => p.id !== id);
+  savePosts();
+  showToast('✅ 已删除');
+  renderDashboard();
+  renderMyPosts();
+}
+
+function logoutAdmin() {
+  adminLoggedIn = false;
+  renderAdminPanel();
+}
+
+// ==================== 导出 ====================
+function exportAll() {
+  if (posts.length === 0) {
+    showToast('📭 暂无数据可导出');
+    return;
+  }
+
+  const csv = [
+    '时间,匿名昵称,情绪,内容,树洞安慰,疏导建议',
+    ...posts.map(p =>
+      `"${new Date(p.time).toLocaleString()}","${p.userName}","${p.mood}","${p.content.replace(/"/g,'""')}","${(p.comfort||'').replace(/"/g,'""')}","${(p.advice||'').replace(/"/g,'""')}"`
+    )
+  ].join('\n');
+
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `解忧树洞_数据导出_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📥 数据已导出');
+}
+
+// ==================== 打地鼠游戏 ====================
+let gameScore = 0, gameTime = 30, gameTimer = null, moleTimer = null;
+let gameRunning = false;
+
+const holes = document.querySelectorAll('.mole');
+const scoreDom = document.getElementById('score');
+const timeDom = document.getElementById('time');
+const gameModalEl = document.getElementById('gameModal');
+const modalTextEl = document.getElementById('modalText');
+
+holes.forEach(mole => {
+  mole.addEventListener('click', function() {
+    if (!gameRunning) return;
+    if (this.classList.contains('show')) {
+      gameScore++;
+      scoreDom.textContent = gameScore;
+      this.classList.remove('show');
+    }
+  });
+});
+
+function showRandomMole() {
+  holes.forEach(m => m.classList.remove('show'));
+  const r = Math.floor(Math.random() * holes.length);
+  holes[r].classList.add('show');
+  setTimeout(() => { holes[r].classList.remove('show'); }, 650);
+}
+
+function startGame() {
+  if (gameRunning) return;
+
+  gameScore = 0;
+  gameTime = 30;
+  gameRunning = true;
+  scoreDom.textContent = gameScore;
+  timeDom.textContent = gameTime;
+
+  clearInterval(gameTimer);
+  clearInterval(moleTimer);
+
+  gameTimer = setInterval(() => {
+    gameTime--;
+    timeDom.textContent = gameTime;
+    if (gameTime <= 0) {
+      clearInterval(gameTimer);
+      clearInterval(moleTimer);
+      gameRunning = false;
+      holes.forEach(m => m.classList.remove('show'));
+      modalTextEl.innerHTML = '🌟 你玩得太棒啦！<br /><br />本次得分：<strong>' + gameScore + ' 分</strong><br /><br />地鼠都被你打跑了，烦恼也一起被打掉啦。希望你能轻轻松一口气，接下来的日子会慢慢变好。';
+      gameModalEl.classList.add('show');
+    }
+  }, 1000);
+
+  moleTimer = setInterval(showRandomMole, 800);
+  showRandomMole();
+}
+
+function closeGameModal() {
+  gameModalEl.classList.remove('show');
+}
+
+// ==================== 工具函数 ====================
+function generateNickname() {
+  const name = randomFrom(funnyNames);
+  document.getElementById('nickname').value = name;
+}
+
+function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function timeAgo(date) {
+  const diff = Date.now() - new Date(date).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return '刚刚';
+  if (mins < 60) return mins + '分钟前';
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return hours + '小时前';
+  return Math.floor(hours / 24) + '天前';
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ==================== 种子数据 ====================
+function seedData() {
+  const seedUsers = [
+    { id: 'u_seed1', name: '不想上班的菠萝' },
+    { id: 'u_seed2', name: '暴躁的小西瓜' },
+    { id: 'u_seed3', name: '心累的柚子' },
+    { id: 'u_seed4', name: '被迫营业的草莓' },
+  ];
+  const now = Date.now();
+
+  const seedPosts = [
+    {
+      id: 'p_seed1', userId: 'u_seed1', userName: '不想上班的菠萝',
+      mood: '😠', content: '今天开会又拖了一个小时，明明五分钟能说完的事非要展开讲，我真的会谢。下班时间不是时间吗？',
+      time: new Date(now - 3600000).toISOString(),
+      comfort: replySet[0].comfort, advice: replySet[0].advice,
+    },
+    {
+      id: 'p_seed2', userId: 'u_seed2', userName: '暴躁的小西瓜',
+      mood: '😩', content: '连续加班一周了，感觉身体被掏空。每天回到家只想躺着，连话都不想说。有时候真的不知道这样拼命是为了什么……',
+      time: new Date(now - 7200000).toISOString(),
+      comfort: replySet[3].comfort, advice: replySet[3].advice,
+    },
+    {
+      id: 'p_seed3', userId: 'u_seed3', userName: '心累的柚子',
+      mood: '😢', content: '今天被领导当众批评了，虽然不是我的错但也没法辩解。下班后在车里坐了很久才回家，成年人的崩溃都是静音的。',
+      time: new Date(now - 10800000).toISOString(),
+      comfort: replySet[1].comfort, advice: replySet[1].advice,
+    },
+    {
+      id: 'p_seed4', userId: 'u_seed4', userName: '被迫营业的草莓',
+      mood: '😊', content: '虽然工作很累，但今天同事偷偷在我桌上放了杯奶茶，还附了一张小纸条写着"辛苦了"。突然觉得人间值得！',
+      time: new Date(now - 18000000).toISOString(),
+      comfort: replySet[6].comfort, advice: replySet[6].advice,
+    },
+  ];
+
+  posts = seedPosts;
+  savePosts();
+}
+
+// 启动
+init();
+</script>
+</body>
+</html>
