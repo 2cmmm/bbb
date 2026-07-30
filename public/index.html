@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>解忧树洞</title>
+    <style>
+        /* ===== 全部样式保留 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.35) 0 8%, transparent 9%),
+                radial-gradient(circle at 90% 18%, rgba(255, 255, 255, 0.22) 0 6%, transparent 7%),
+                linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%);
+            padding: 18px;
+            animation: bgNight 12s ease-in-out infinite alternate;
+            position: relative;
+            overflow-x: hidden;
+        }
+        @keyframes bgNight {
+            0% {
+                background:
+                    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.35) 0 8%, transparent 9%),
+                    radial-gradient(circle at 90% 18%, rgba(255, 255, 255, 0.22) 0 6%, transparent 7%),
+                    linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%);
+            }
+            50% {
+                background:
+                    radial-gradient(circle at 15% 14%, rgba(255, 255, 255, 0.4) 0 10%, transparent 11%),
+                    radial-gradient(circle at 85% 22%, rgba(255, 255, 255, 0.28) 0 7%, transparent 8%),
+                    linear-gradient(180deg, #1e1e3f 0%, #1a2a4a 45%, #123a66 70%, #f0dcff 100%);
+            }
+            100% {
+                background:
+                    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.35) 0 8%, transparent 9%),
+                    radial-gradient(circle at 90% 18%, rgba(255, 255, 255, 0.22) 0 6%, transparent 7%),
+                    linear-gradient(180deg, #1a1a2e 0%, #16213e 45%, #0f3460 70%, #e8d5ff 100%);
+            }
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        .star:nth-child(1) { top: 8%;  left: 12%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 12%; left: 30%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 6%;  left: 60%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 18%; left: 80%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 22%; left: 18%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 30%; left: 50%; animation-delay: 0.8s; }
+        .star:nth-child(7) { top: 10%; left: 75%; animation-delay: 1.2s; }
+        .star:nth-child(8) { top: 25%; left: 8%;  animation-delay: 1.8s; }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .grass {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(180deg, transparent 0%, #5a8f7b 30%, #3f6b58 100%);
+            z-index: 0;
+        }
+        .firefly {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 150, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 150, 0.8);
+            animation: firefly 8s ease-in-out infinite;
+            z-index: 1;
+        }
+        .firefly:nth-child(9)  { left: 10%; bottom: 120px; animation-delay: 0s; }
+        .firefly:nth-child(10) { left: 30%; bottom: 100px; animation-delay: 2s; }
+        .firefly:nth-child(11) { left: 55%; bottom: 130px; animation-delay: 4s; }
+        .firefly:nth-child(12) { left: 80%; bottom: 90px;  animation-delay: 6s; }
+        .firefly:nth-child(13) { left: 18%; bottom: 140px; animation-delay: 1s; }
+        .firefly:nth-child(14) { left: 42%; bottom: 115px; animation-delay: 2.7s; }
+        .firefly:nth-child(15) { left: 68%; bottom: 132px; animation-delay: 5s; }
+        .firefly:nth-child(16) { left: 88%; bottom: 102px; animation-delay: 7.3s; }
+        .firefly:nth-child(17) { left: 25%; bottom: 90px;  animation-delay: 0.4s; }
+        .firefly:nth-child(18) { left: 60%; bottom: 142px; animation-delay: 3.4s; }
+        .firefly:nth-child(19) { left: 5%;  bottom: 130px; animation-delay: 1.5s; }
+        .firefly:nth-child(20) { left: 48%; bottom: 95px;  animation-delay: 4.2s; }
+        .firefly:nth-child(21) { left: 75%; bottom: 145px; animation-delay: 6.2s; }
+        .firefly:nth-child(22) { left: 35%; bottom: 122px; animation-delay: 2.2s; }
+        .firefly:nth-child(23) { left: 92%; bottom: 118px; animation-delay: 7.8s; }
+        .firefly:nth-child(24) { left: 12%; bottom: 98px;  animation-delay: 0.7s; }
+        .firefly:nth-child(25) { left: 52%; bottom: 138px; animation-delay: 3.8s; }
+        .firefly:nth-child(26) { left: 82%; bottom: 125px; animation-delay: 6.6s; }
+        @keyframes firefly {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+            50% { transform: translateY(-30px) translateX(15px); opacity: 1; }
+        }
+        .wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: pageIn 1s ease-out;
+        }
+        @keyframes pageIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .top-deco {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-top: 10px;
+        }
+        .tree {
+            font-size: 52px;
+            animation: treeSway 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 200, 0.6));
+        }
+        @keyframes treeSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            color: #fffaf2;
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            font-weight: 800;
+            font-family: "Comic Sans MS", "Microsoft YaHei", sans-serif;
+            animation: titleGlow 2.2s ease-in-out infinite alternate;
+        }
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 8px #fff, 0 0 15px #ffdd88, 0 0 25px #ffc866, 0 0 35px #ffbb44; }
+            to { text-shadow: 0 0 12px #fff, 0 0 25px #ffdd99, 0 0 40px #ffcc77, 0 0 55px #ffbf55; }
+        }
+        .subtitle {
+            text-align: center;
+            color: #d6c7ff;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 24px 0;
+        }
+        .divider span { color: #ffd700; font-size: 18px; }
+        .divider-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), transparent);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 26px;
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: cardPop 0.8s ease-out backwards;
+        }
+        .card:nth-of-type(1) { animation-delay: 0.2s; }
+        .card:nth-of-type(2) { animation-delay: 0.4s; }
+        .card:nth-of-type(3) { animation-delay: 0.6s; }
+        .card:nth-of-type(4) { animation-delay: 0.8s; }
+        @keyframes cardPop {
+            from { opacity: 0; transform: scale(0.96) translateY(18px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .card-title {
+            font-size: 20px;
+            color: #6a5acd;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Comic Sans MS", "Microsoft YaHei", sans-serif;
+        }
+        .mood-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .mood-item {
+            width: 100%;
+            text-align: center;
+            padding: 12px 6px;
+            background: #f7f3ff;
+            border-radius: 16px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.25s ease;
+        }
+        .mood-item:hover { transform: translateY(-4px); background: #e9ddff; }
+        .mood-item.active {
+            border-color: #6a5acd;
+            background: #e9ddff;
+            box-shadow: 0 0 0 4px rgba(106, 90, 205, 0.15);
+        }
+        .mood-item span { font-size: 30px; display: block; margin-bottom: 6px; }
+        .mood-item p { font-size: 13px; color: #555; }
+        .nickname-box { display: flex; gap: 10px; margin-bottom: 16px; }
+        .nickname-box input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #d6c7ff;
+            border-radius: 12px;
+            background: #fcfbff;
+            font-size: 15px;
+            color: #444;
+            outline: none;
+        }
+        .nickname-box button {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 12px;
+            background: #6a5acd;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        textarea {
+            width: 100%;
+            min-height: 140px;
+            border: 1px solid #d6c7ff;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 15px;
+            color: #444;
+            outline: none;
+            background: #fcfbff;
+            transition: 0.3s ease;
+            resize: none;
+            line-height: 1.6;
+        }
+        textarea:focus {
+            border-color: #6a5acd;
+            box-shadow: 0 0 0 4px rgba(106, 90, 205, 0.15);
+        }
+        .submit-btn {
+            width: 100%;
+            margin-top: 16px;
+            padding: 15px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(90deg, #6a5acd, #8b74d8);
+            color: #fff;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 90, 205, 0.35);
+        }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .game-area { margin-top: 10px; }
+        .game-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #555;
+        }
+        .hole-wrap {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .hole {
+            background: #b89676;
+            height: 96px;
+            border-radius: 50% 50% 35% 35%;
+            position: relative;
+            overflow: hidden;
+        }
+        .mole {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 52px;
+            transition: bottom 0.3s ease;
+            cursor: pointer;
+        }
+        .mole.show { bottom: 5px; }
+        .game-operate { text-align: center; margin-top: 10px; }
+        .game-operate button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6a5acd, #8b74d8);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .game-operate button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(106, 90, 205, 0.35);
+        }
+        .msg-item {
+            background: #f7f3ff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border-left: 4px solid #6a5acd;
+            animation: msgSlide 0.6s ease-out backwards;
+        }
+        @keyframes msgSlide {
+            from { opacity: 0; transform: translateX(-12px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .msg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .msg-nickname { font-size: 15px; color: #6a5acd; font-weight: bold; }
+        .msg-time { font-size: 12px; color: #aaa; }
+        .msg-mood { font-size: 26px; margin-bottom: 8px; }
+        .msg-text { color: #444; line-height: 1.7; margin-bottom: 10px; font-size: 15px; white-space: pre-wrap; word-break: break-word; }
+        .reply-box {
+            background: #ede9ff;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #553c9a;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .suggestion-box {
+            background: #fffaf2;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #b8860b;
+            line-height: 1.6;
+            border-left: 4px solid #ffd700;
+        }
+        .empty-tip { text-align: center; color: #aaa; padding: 36px 0; font-size: 15px; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #d6c7ff;
+            font-size: 14px;
+            line-height: 1.7;
+            padding-bottom: 20px;
+        }
+        .admin-btn {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6a5acd, #8b74d8);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .admin-btn:hover { transform: scale(1.05); }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            padding: 18px;
+        }
+        .modal-box {
+            width: 100%;
+            max-width: 480px;
+            background: #fffaf2;
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            animation: modalPop 0.4s ease-out;
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-box h3 {
+            color: #6a5acd;
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-family: "Comic Sans MS", "Microsoft YaHei", sans-serif;
+        }
+        .modal-box p { color: #555; line-height: 1.8; font-size: 15px; margin-bottom: 18px; }
+        .modal-box input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d6c7ff;
+            border-radius: 12px;
+            background: #fcfbff;
+            font-size: 15px;
+            color: #444;
+            outline: none;
+            margin-bottom: 12px;
+        }
+        .modal-box button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6a5acd, #8b74d8);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 6px;
+        }
+        .modal-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(106, 90, 205, 0.35);
+        }
+        .admin-list { text-align: left; max-height: 400px; overflow-y: auto; margin-top: 16px; }
+        .admin-item {
+            background: #f7f3ff;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-left: 4px solid #6a5acd;
+        }
+        .admin-item-title { font-size: 15px; color: #6a5acd; font-weight: bold; margin-bottom: 8px; }
+        .admin-item-text { color: #444; line-height: 1.6; font-size: 15px; margin-bottom: 8px; white-space: pre-wrap; word-break: break-word; }
+        .admin-item-time { font-size: 12px; color: #aaa; }
+        .delete-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff6b6b;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .delete-btn:hover { background: #ff4d4d; }
+        .loading { text-align: center; color: #d6c7ff; padding: 20px; font-size: 15px; }
+        .toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            z-index: 100;
+            animation: toastIn 0.4s ease;
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="grass"></div>
+    <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+    <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+    <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+    <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+    <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+
+    <div class="wrap">
+        <div class="top-deco">
+            <div class="tree">🌳</div>
+        </div>
+        <h1>解忧树洞</h1>
+        <p class="subtitle">夜色温柔，心事也可以轻轻安放。<br />把烦恼说出来，让树洞替你接住。</p>
+        <div class="divider">
+            <div class="divider-line"></div>
+            <span>✨</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">🎮 即时解压 · 打地鼠</h2>
+            <p style="color:#666;margin-bottom:12px;font-size:15px;">压力无处释放？直接点击地鼠，把烦恼一起打掉。</p>
+            <div class="game-area">
+                <div class="game-status">
+                    <div>当前得分：<span id="score">0</span></div>
+                    <div>剩余时间：<span id="time">30</span>s</div>
+                </div>
+                <div class="hole-wrap" id="holeWrap">
+                    <div class="hole"><div class="mole">🐹</div></div>
+                    <div class="hole"><div class="mole">🐹</div></div>
+                    <div class="hole"><div class="mole">🐹</div></div>
+                    <div class="hole"><div class="mole">🐹</div></div>
+                    <div class="hole"><div class="mole">🐹</div></div>
+                    <div class="hole"><div class="mole">🐹</div></div>
+                </div>
+                <div class="game-operate">
+                    <button onclick="startGame()">开启30秒解压对局</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">💌 写下你的烦恼</h2>
+            <p style="color:#666;margin-bottom:12px;font-size:15px;">选择你当下的心情：</p>
+            <div class="mood-list" id="moodList">
+                <div class="mood-item" data-mood="🤩"><span>🤩</span><p>兴奋</p></div>
+                <div class="mood-item" data-mood="😊"><span>😊</span><p>愉悦</p></div>
+                <div class="mood-item" data-mood="😌"><span>😌</span><p>平静</p></div>
+                <div class="mood-item" data-mood="😔"><span>😔</span><p>低落</p></div>
+                <div class="mood-item" data-mood="😢"><span>😢</span><p>难过</p></div>
+                <div class="mood-item" data-mood="🥺"><span>🥺</span><p>委屈</p></div>
+                <div class="mood-item" data-mood="😠"><span>😠</span><p>愤怒</p></div>
+                <div class="mood-item" data-mood="😩"><span>😩</span><p>疲惫</p></div>
+                <div class="mood-item" data-mood="😰"><span>😰</span><p>焦虑</p></div>
+                <div class="mood-item" data-mood="😱"><span>😱</span><p>慌张</p></div>
+                <div class="mood-item" data-mood="😒"><span>😒</span><p>无奈</p></div>
+                <div class="mood-item" data-mood="🥱"><span>🥱</span><p>倦怠</p></div>
+            </div>
+            <p style="color:#666;margin:16px 0 8px;font-size:15px;">你的匿名昵称：</p>
+            <div class="nickname-box">
+                <input id="nickname" type="text" placeholder="点击随机生成，也可以自己改" />
+                <button onclick="generateNickname()">随机生成</button>
+            </div>
+            <textarea id="content" placeholder="在这里写下你想说的话... 也许是工作里的委屈，也许是生活中的小烦恼，也许只是想找一个安静的地方放空。写完这一页，就让烦恼暂时留在这里吧。"></textarea>
+            <button class="submit-btn" onclick="sendMsg()">🌙 提交到解忧树洞</button>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">🌙 大家的心事</h2>
+            <div id="messageList">
+                <div class="loading">⏳ 加载中...</div>
+            </div>
+        </div>
+
+        <div class="footer">愿你在这里得到片刻放松<br />解忧树洞 · 接住你的每一种情绪</div>
+    </div>
+
+    <div class="admin-btn" onclick="openAdminModal()">🔐</div>
+
+    <div class="modal" id="gameModal">
+        <div class="modal-box">
+            <h3>🌟 你玩得太棒啦！</h3>
+            <p id="modalText">地鼠都被你打跑了，烦恼也一起被打掉啦。<br />希望你能轻轻松一口气，接下来的日子会慢慢变好。</p>
+            <button onclick="closeModal()">知道啦</button>
+        </div>
+    </div>
+
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-box">
+            <h3>管理员登录</h3>
+            <p>请输入管理员密码进入后台</p>
+            <input id="adminPassword" type="password" placeholder="输入密码" />
+            <br />
+            <button onclick="adminLogin()">确认进入</button>
+            <button onclick="closeAdminLogin()">取消</button>
+        </div>
+    </div>
+
+    <div class="modal" id="adminPanelModal">
+        <div class="modal-box">
+            <h3>🗂️ 树洞后台管理</h3>
+            <p>这里可以查看所有留言，并删除不当内容</p>
+            <div id="adminList" class="admin-list"></div>
+            <button onclick="closeAdminPanel()">关闭后台</button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // API 配置（自托管后端，无需云开发）
+        // =============================================
+        const API_BASE = '';  // 同源部署，留空即可
+
+        // =============================================
+        // 工具函数
+        // =============================================
+        function showToast(msg) {
+            const old = document.querySelector('.toast');
+            if (old) old.remove();
+            const div = document.createElement('div');
+            div.className = 'toast';
+            div.textContent = msg;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        const funnyNames = [
+            '下班第一名', '奶茶续命选手', '今天也不想上班',
+            '情绪偷偷藏好了', '树洞特派员', '烦恼粉碎机',
+            '快乐失踪人口', '压力山大人', '只想躺着放空',
+            '今天也很努力', '委屈但不说', '愤怒的小云朵',
+            '疲惫小星星', '焦虑收藏家', '无奈体验官',
+            '打工人代言人', '摸鱼冠军候选人', '情绪管理员',
+            '深夜思考选手', '温柔吐槽家'
+        ];
+        function generateNickname() {
+            const name = funnyNames[Math.floor(Math.random() * funnyNames.length)];
+            document.getElementById('nickname').value = name;
+        }
+
+        let selectMood = '';
+        const moodItems = document.querySelectorAll('.mood-item');
+        moodItems.forEach(item => {
+            item.onclick = function() {
+                moodItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                selectMood = this.dataset.mood;
+            };
+        });
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        // =============================================
+        // 发送留言
+        // =============================================
+        async function sendMsg() {
+            const nicknameInput = document.getElementById('nickname');
+            const contentInput = document.getElementById('content');
+            const nickname = nicknameInput.value.trim();
+            const text = contentInput.value.trim();
+            if (!nickname) { showToast('请先填写或生成一个匿名昵称'); return; }
+            if (!text) { showToast('请写下你想倾诉的内容哦'); return; }
+            if (!selectMood) { showToast('请先选择一个当下的心情'); return; }
+            if (text.length < 2) { showToast('多说一点吧，至少两个字 😊'); return; }
+
+            const btn = document.querySelector('.submit-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ 提交中...';
+            try {
+                const res = await fetch(API_BASE + '/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nickname, mood: selectMood, text })
+                });
+                const data = await res.json();
+                if (data.code !== 0) {
+                    showToast('❌ ' + (data.msg || '提交失败'));
+                    return;
+                }
+                contentInput.value = '';
+                nicknameInput.value = '';
+                selectMood = '';
+                moodItems.forEach(i => i.classList.remove('active'));
+                showToast('✅ 你的心事已经放进解忧树洞啦！');
+                await renderMessages();
+            } catch (err) {
+                console.error(err);
+                showToast('❌ 网络异常，提交失败');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🌙 提交到解忧树洞';
+            }
+        }
+
+        // =============================================
+        // 读取留言
+        // =============================================
+        async function renderMessages() {
+            const box = document.getElementById('messageList');
+            try {
+                const res = await fetch(API_BASE + '/api/messages');
+                const data = await res.json();
+                if (data.code !== 0) {
+                    box.innerHTML = `<div class="empty-tip">⚠️ 加载留言失败</div>`;
+                    return;
+                }
+                const list = data.data || [];
+                if (list.length === 0) {
+                    box.innerHTML = `<div class="empty-tip">🌱 这里还没有留言，成为第一个把心事放进树洞的人吧。</div>`;
+                    return;
+                }
+                let html = '';
+                list.forEach(item => {
+                    html += `
+                        <div class="msg-item">
+                            <div class="msg-header">
+                                <span class="msg-nickname">${escapeHtml(item.nickname)}</span>
+                                <span class="msg-time">${escapeHtml(item.time)}</span>
+                            </div>
+                            <div class="msg-mood">${escapeHtml(item.mood)}</div>
+                            <div class="msg-text">${escapeHtml(item.text)}</div>
+                            <div class="reply-box">💛 树洞暖心安慰：${escapeHtml(item.comfort || '愿你被温柔对待')}</div>
+                            <div class="suggestion-box">💡 情绪疏导小建议：${escapeHtml(item.advice || '好好照顾自己')}</div>
+                        </div>
+                    `;
+                });
+                box.innerHTML = html;
+            } catch (err) {
+                console.error(err);
+                box.innerHTML = `<div class="empty-tip">⚠️ 加载留言失败，请刷新重试</div>`;
+            }
+        }
+
+        // =============================================
+        // 管理员后台
+        // =============================================
+        let adminPasswordCache = '';
+
+        function openAdminModal() {
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminLoginModal').style.display = 'flex';
+        }
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+        }
+        async function adminLogin() {
+            const input = document.getElementById('adminPassword').value;
+            try {
+                // 用读取接口验证密码
+                const res = await fetch(API_BASE + '/api/admin/messages', {
+                    headers: { 'X-Admin-Password': input }
+                });
+                const data = await res.json();
+                if (data.code !== 0) {
+                    showToast('❌ ' + (data.msg || '密码错误'));
+                    return;
+                }
+                adminPasswordCache = input;
+                closeAdminLogin();
+                renderAdminPanel(data.data || []);
+                document.getElementById('adminPanelModal').style.display = 'flex';
+            } catch (err) {
+                console.error(err);
+                showToast('❌ 网络异常');
+            }
+        }
+        function renderAdminPanel(list) {
+            const adminList = document.getElementById('adminList');
+            if (!list || list.length === 0) {
+                adminList.innerHTML = `<div class="empty-tip">暂无留言数据</div>`;
+                return;
+            }
+            let html = '';
+            list.forEach(item => {
+                html += `
+                    <div class="admin-item">
+                        <div class="admin-item-title">${escapeHtml(item.nickname)} · ${escapeHtml(item.mood)} · ${escapeHtml(item.time)}</div>
+                        <div class="admin-item-text">${escapeHtml(item.text)}</div>
+                        <button class="delete-btn" onclick="deleteMsg('${item.id}')">🗑️ 删除这条</button>
+                    </div>
+                `;
+            });
+            adminList.innerHTML = html;
+        }
+        async function deleteMsg(id) {
+            if (!confirm('确定删除这条留言吗？')) return;
+            try {
+                const res = await fetch(API_BASE + '/api/admin/messages/' + id, {
+                    method: 'DELETE',
+                    headers: { 'X-Admin-Password': adminPasswordCache }
+                });
+                const data = await res.json();
+                if (data.code !== 0) {
+                    showToast('❌ ' + (data.msg || '删除失败'));
+                    return;
+                }
+                showToast('✅ 已删除');
+                // 重新拉取后台列表
+                const r2 = await fetch(API_BASE + '/api/admin/messages', {
+                    headers: { 'X-Admin-Password': adminPasswordCache }
+                });
+                const d2 = await r2.json();
+                renderAdminPanel(d2.data || []);
+                await renderMessages();
+            } catch (err) {
+                console.error(err);
+                showToast('❌ 网络异常，删除失败');
+            }
+        }
+        function closeAdminPanel() {
+            document.getElementById('adminPanelModal').style.display = 'none';
+        }
+
+        // =============================================
+        // 打地鼠游戏
+        // =============================================
+        let score = 0;
+        let gameTime = 30;
+        let timer = null;
+        let moleTimer = null;
+        const holes = document.querySelectorAll('.mole');
+        const scoreDom = document.getElementById('score');
+        const timeDom = document.getElementById('time');
+        const gameModal = document.getElementById('gameModal');
+        const modalText = document.getElementById('modalText');
+        holes.forEach(mole => {
+            mole.onclick = function() {
+                if (this.classList.contains('show')) {
+                    score++;
+                    scoreDom.innerText = score;
+                    this.classList.remove('show');
+                }
+            };
+        });
+        function showRandomMole() {
+            holes.forEach(m => m.classList.remove('show'));
+            const random = Math.floor(Math.random() * holes.length);
+            holes[random].classList.add('show');
+            setTimeout(() => {
+                holes[random].classList.remove('show');
+            }, 700);
+        }
+        function startGame() {
+            score = 0;
+            gameTime = 30;
+            scoreDom.innerText = score;
+            timeDom.innerText = gameTime;
+            clearInterval(timer);
+            clearInterval(moleTimer);
+            timer = setInterval(() => {
+                gameTime--;
+                timeDom.innerText = gameTime;
+                if (gameTime <= 0) {
+                    clearInterval(timer);
+                    clearInterval(moleTimer);
+                    holes.forEach(m => m.classList.remove('show'));
+                    modalText.innerHTML =
+                        `🌟 你玩得太棒啦！<br />本次得分：${score} 分<br /><br />地鼠都被你打跑了，烦恼也一起被打掉啦。希望你能轻轻松一口气，接下来的日子会慢慢变好。`;
+                    gameModal.style.display = 'flex';
+                }
+            }, 1000);
+            moleTimer = setInterval(showRandomMole, 900);
+        }
+        function closeModal() {
+            gameModal.style.display = 'none';
+        }
+
+        // =============================================
+        // 页面加载
+        // =============================================
+        window.onload = async function() {
+            document.getElementById('messageList').innerHTML = `<div class="loading">⏳ 加载中...</div>`;
+            try {
+                await renderMessages();
+                const nickInput = document.getElementById('nickname');
+                if (!nickInput.value) {
+                    generateNickname();
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('messageList').innerHTML =
+                    `<div class="empty-tip">⚠️ 连接服务器失败，请检查网络后刷新</div>`;
+            }
+        };
+
+        // 暴露给 onclick
+        window.generateNickname = generateNickname;
+        window.sendMsg = sendMsg;
+        window.startGame = startGame;
+        window.closeModal = closeModal;
+        window.openAdminModal = openAdminModal;
+        window.closeAdminLogin = closeAdminLogin;
+        window.adminLogin = adminLogin;
+        window.closeAdminPanel = closeAdminPanel;
+        window.deleteMsg = deleteMsg;
+    </script>
+</body>
+</html>
